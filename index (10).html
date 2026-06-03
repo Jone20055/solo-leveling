@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Leveling: Shadow Monarch Gauntlet</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* CSS styling for the interface with optimized colors and layout */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #030611; color: #f1f5f9; font-family: 'Rajdhani', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; min-height: 100vh; overflow-x: hidden; }
+        h1 { font-family: 'Orbitron', sans-serif; color: #00d2ff; text-shadow: 0 0 15px rgba(0, 210, 255, 0.6); margin-bottom: 25px; font-size: 32px; text-transform: uppercase; }
+        #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030611; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s ease; }
+        #btn-start-game { background: linear-gradient(180deg, #1e1b4b 0%, #4f46e5 100%); color: #fff; border: 2px solid #818cf8; padding: 16px 45px; font-size: 16px; border-radius: 8px; cursor: pointer; }
+        #hud-container { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; max-width: 1000px; background: rgba(8, 14, 36, 0.95); border: 1px solid #1e40af; border-radius: 12px; padding: 20px; margin-bottom: 20px; gap: 20px; }
+        .hud-val { color: #00d2ff; }
+        .control-panel { background: rgba(6, 11, 28, 0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        #controls-grid { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 1000px; gap: 15px; }
+        button { background: #0f172a; color: #cbd5e1; border: 1px solid #334155; padding: 10px; border-radius: 6px; cursor: pointer; text-align: left; width: 100%; }
+        button:hover { background: #1e293b; border-color: #00d2ff; }
+        #combat-view { width: 100%; max-width: 1000px; height: 180px; background: #02040a; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; margin-bottom: 20px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div id="start-screen">
+        <h1>SOLO LEVELING</h1>
+        <button id="btn-start-game" onclick="startGameEngine()">AWAKEN SYSTEM</button>
+    </div>
+
+    <h1>SYSTEM INTERFACE</h1>
+    <div id="hud-container">
+        <div>Level: <span id="lbl-level" class="hud-val">1</span></div>
+        <div style="text-align: center;">Floor: <span id="lbl-floor">0</span></div>
+        <div style="text-align: right;">HP: <span id="lbl-hp" class="hud-val">100</span></div>
+    </div>
+
+    <div id="combat-view">
+        <h3>System Log</h3>
+        <div id="combat-log">System Initialized.</div>
+    </div>
+
+    <div id="controls-grid">
+        <div class="control-panel">
+            <h3>Stats</h3>
+            <button onclick="addStat('power')">Power</button>
+            <button onclick="addStat('defence')">Defence</button>
+        </div>
+        <div class="control-panel">
+            <h3>Shop</h3>
+            <button onclick="buyShadow('Common')">Common</button>
+        </div>
+        <div class="control-panel">
+            <h3>Action</h3>
+            <button id="btn-gate" onclick="combatTrigger()">Enter Arena</button>
+        </div>
+    </div>
+
+    <script>
+        // Core state management, optimized to prevent freezing
+        let state = { level: 1, xp: 0, floor: 0, points: 0, mana: 10, hp: 100, stats: {power: 0, defence: 0}, shadows: {Common: 0} };
+        
+        function saveGame() { localStorage.setItem("sl_save", JSON.stringify(state)); }
+        
+        function loadGame() {
+            let saved = localStorage.getItem("sl_save");
+            if (saved) state = JSON.parse(saved);
+        }
+
+        function startGameEngine() {
+            document.getElementById("start-screen").style.opacity = "0";
+            setTimeout(() => document.getElementById("start-screen").remove(), 400);
+            startInterval();
+        }
+
+        function startInterval() {
+            setInterval(() => {
+                state.xp += 1;
+                updateDOM();
+                saveGame();
+            }, 1000);
+        }
+
+        function updateDOM() {
+            document.getElementById('lbl-level').innerText = state.level;
+            document.getElementById('lbl-floor').innerText = state.floor;
+            document.getElementById('lbl-hp').innerText = state.hp;
+        }
+
+        function addStat(type) { state.points++; updateDOM(); }
+        function buyShadow(type) { state.shadows[type]++; updateDOM(); }
+        function combatTrigger() { state.floor++; updateDOM(); }
+
+        loadGame();
+        updateDOM();
+    </script>
+</body>
+</html>
