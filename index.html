@@ -67,10 +67,38 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
             transition: all 0.3s ease;
+            text-align: center;
+            width: auto;
+            max-width: 100%;
         }
         #btn-start-game:hover {
             box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
             transform: scale(1.05);
+        }
+        #start-info-box {
+            margin-top: 30px;
+            background: rgba(6, 11, 28, 0.6);
+            border: 1px dashed #1e3a8a;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 400px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        #start-info-box h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        #start-info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        #start-info-box li {
+            margin-bottom: 6px;
         }
         #hud-container {
             display: grid;
@@ -194,11 +222,18 @@
     <div id="start-screen">
         <div id="start-logo">SOLO LEVELING<br><span style="font-size: 16px; color: #94a3b8; letter-spacing: 2px;">SHADOW MONARCH GAUNTLET</span></div>
         <button id="btn-start-game" onclick="startGameEngine()">⚠️ AWAKEN SYSTEM</button>
+        
+        <div id="start-info-box">
+            <h4>🛰️ SYSTEM CONNECTIVITY INTERFACE</h4>
+            <ul>
+                <li>• ⏳ Real-Time Progress: 1 second = 1 XP. System will scale player levels automatically.</li>
+                <li>• 💾 Autonomous Sync: State parameters are cached directly inside browser local storage every second.</li>
+            </ul>
+        </div>
     </div>
 
     <h1>THE ARCHITECT'S WEB SYSTEM</h1>
 
-    <!-- Core Player Website HUD Dashboard -->
     <div id="hud-container">
         <div class="hud-column">
             <div>👑 MC: <span class="hud-val">SUNG JINWOO</span></div>
@@ -215,23 +250,4 @@
         </div>
     </div>
 
-    <!-- Active Text-Based Arena Console Box -->
     <div id="combat-view">
-        <h3><span>📝 SYSTEM MONITOR LOG</span></h3>
-        <div id="combat-log">Welcome Hunter. You are on Floor 0: TUTORIAL GATE. Click 'ENTER ARENA' to clear the trial dummy.</div>
-    </div>
-
-    <!-- Interactive Navigation Web Menus -->
-    <div id="controls-grid">
-        <div class="control-panel">
-            <h3>📊 STAT TUNING</h3>
-            <div class="scrollable-actions">
-                <button onclick="addStat('power')"><span>💪 Power (x2 ATK)</span> <span class="stat-count" id="stat-power">0</span></button>
-                <button onclick="addStat('defence')"><span>🛡️ Defence (x2 HP)</span> <span class="stat-count" id="stat-defence">0</span></button>
-                <button onclick="addStat('speed')"><span>👟 Speed (+10% Dg)</span> <span class="stat-count" id="stat-speed">0</span></button>
-                <button onclick="addStat('mana')"><span>🧪 Mana (+5k MP)</span> <span class="stat-count" id="stat-mana">0</span></button>
-            </div>
-        </div>
-        
-        <div class="control-panel">
-            <h3>🛒 SHADOW SHOP</h3>
