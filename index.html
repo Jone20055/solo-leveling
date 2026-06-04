@@ -68,34 +68,25 @@
             box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
             transition: all 0.3s ease;
             text-align: center;
-            width: auto;
-            max-width: 100%;
+            margin-bottom: 15px;
         }
         #btn-start-game:hover {
             box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
             transform: scale(1.05);
         }
-        #start-info-box {
-            margin-top: 30px;
-            background: rgba(6, 11, 28, 0.6);
-            border: 1px dashed #1e3a8a;
-            padding: 15px;
-            border-radius: 8px;
-            max-width: 400px;
-            font-size: 13px;
-            color: #94a3b8;
-        }
-        #start-info-box h4 {
+        .btn-wipe {
+            background: #7f1d1d;
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 8px 16px;
+            font-size: 12px;
             font-family: 'Orbitron', sans-serif;
-            color: #38bdf8;
-            margin-bottom: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
             text-align: center;
-            font-size: 11px;
-            letter-spacing: 1px;
         }
-        #start-info-box ul { list-style: none; padding: 0; }
-        #start-info-box li { margin-bottom: 6px; }
-
+        .btn-wipe:hover { background: #b91c1c; color: #fff; }
         #hud-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -108,7 +99,6 @@
             padding: 20px;
             margin-bottom: 20px;
             gap: 20px;
-            position: relative;
         }
         .hud-column { display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 700; text-transform: uppercase;}
         .hud-val { color: #00d2ff; }
@@ -192,6 +182,7 @@
             font-size: 14px;
             color: #94a3b8;
         }
+        #lbl-army { color: #a855f7; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -199,14 +190,7 @@
     <div id="start-screen">
         <div id="start-logo">SOLO LEVELING<br><span style="font-size: 16px; color: #94a3b8; letter-spacing: 2px;">SHADOW MONARCH GAUNTLET</span></div>
         <button id="btn-start-game" onclick="startGameEngine()">⚠️ AWAKEN SYSTEM</button>
-        
-        <div id="start-info-box">
-            <h4>🛰️ SYSTEM CONNECTIVITY INTERFACE</h4>
-            <ul>
-                <li>• ⏳ Real-Time Progress: 1 second = 1 XP. Player levels update automatically.</li>
-                <li>• 💾 Local Memory Core Enabled. Data auto-saves in real-time.</li>
-            </ul>
-        </div>
+        <button class="btn-wipe" onclick="wipeSaveData()">🗑️ CLEAR BROKEN CACHE SAVE</button>
     </div>
 
     <h1>THE ARCHITECT'S WEB SYSTEM</h1>
@@ -228,7 +212,7 @@
     </div>
 
     <div id="combat-view">
-        <h3><span>📝 SYSTEM MONITOR LOG</span></h3>
+        <h3>📝 SYSTEM MONITOR LOG</h3>
         <div id="combat-log">Welcome Hunter. You are on Floor 0: TUTORIAL GATE. Click 'ENTER ARENA' to clear the trial dummy.</div>
     </div>
 
@@ -243,3 +227,9 @@
             </div>
         </div>
         
+        <div class="control-panel">
+            <h3>🛒 SHADOW SHOP</h3>
+            <div class="scrollable-actions">
+                <button onclick="buyShadow('Common', 10)"><span>🔮 Common</span> <span>10 MP</span></button>
+                <button onclick="buyShadow('Uncommon', 50)"><span>🔮 Uncommon</span> <span>50 MP</span></button>
+                <button onclick="buyShadow('Rare', 250)"><span>🔮 Rare</span> <span>250 MP</span></button>
