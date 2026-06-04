@@ -50,7 +50,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             background: linear-gradient(135deg, rgba(8, 14, 36, 0.95) 0%, rgba(3, 6, 17, 0.95) 100%);
             border: 1px solid #1e40af;
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.15), inset 0 0 15px rgba(30, 64, 175, 0.3);
@@ -66,8 +66,8 @@
         
         #combat-view {
             width: 100%;
-            max-width: 1000px;
-            height: 180px;
+            max-width: 1100px;
+            height: 280px;
             background: #02040a;
             border: 1px solid #1e293b;
             border-radius: 8px;
@@ -76,15 +76,16 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
         }
         #combat-view h3 { font-family: 'Orbitron', sans-serif; font-size: 13px; color: #ef4444; border-bottom: 1px solid #1e293b; padding-bottom: 6px;}
-        #combat-log { font-size: 13px; color: #94a3b8; overflow-y: auto; flex-grow: 1; font-family: monospace; white-space: pre-wrap; }
+        #combat-log { font-size: 14px; color: #94a3b8; overflow-y: auto; flex-grow: 1; font-family: monospace; white-space: pre-wrap; line-height: 1.5; }
 
         #controls-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             gap: 15px;
         }
         .control-panel {
@@ -123,16 +124,20 @@
             text-align: center;
             color: #fff;
             font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             padding: 15px 10px;
             margin-top: auto;
             display: block;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
         }
-        #btn-gate:hover { background: #3730a3; border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.6); }
+        #btn-gate:hover { background: #3730a3; border-color: #6366f1; box-shadow: 0 0 20px rgba(99, 102, 241, 0.7); }
 
         #army-poster {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             background: rgba(6, 11, 28, 0.6);
             border: 1px dashed #334155;
             padding: 15px;
@@ -141,7 +146,6 @@
             font-size: 14px;
             color: #94a3b8;
         }
-        #lbl-army { color: #a855f7; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -149,12 +153,12 @@
     <h1>THE ARCHITECT'S WEB SYSTEM</h1>
     <button class="btn-wipe" onclick="wipeSaveData()">🗑️ FORCE RESET CORRUPTED SAVE HISTORY</button>
 
-    <!-- Core Player Website HUD Dashboard -->
     <div id="hud-container">
         <div class="hud-column">
             <div>👑 MC: <span class="hud-val">SUNG JINWOO</span></div>
             <div>👑 LEVEL: <span id="lbl-level" class="hud-val">1</span> (<span id="lbl-xp">0</span>/<span id="lbl-max-xp">100</span> XP)</div>
             <div>📊 STAT POINTS: <span id="lbl-points" class="hud-val">0</span></div>
+            <div>⚔️ CURRENT WEAPON: <span id="lbl-weapon" style="color: #ffbc00;">Fists</span></div>
         </div>
         <div class="hud-column">
             FLOOR<br><span id="lbl-floor">0</span>
@@ -166,21 +170,19 @@
         </div>
     </div>
 
-    <!-- Active Text-Based Arena Console Box -->
     <div id="combat-view">
         <h3>📝 SYSTEM MONITOR LOG</h3>
         <div id="combat-log">Welcome Hunter. You are on Floor 0: TUTORIAL GATE. Click 'ENTER ARENA' to clear the trial dummy. If interface elements lock up, use the red Force Reset button above.</div>
     </div>
 
-    <!-- Interactive Navigation Web Menus -->
     <div id="controls-grid">
         <div class="control-panel">
             <h3>📊 STAT TUNING</h3>
             <div class="scrollable-actions">
-                <button onclick="addStat('power')"><span>💪 Power (x2 ATK)</span> <span class="stat-count" id="stat-power">0</span></button>
-                <button onclick="addStat('defence')"><span>🛡️ Defence (x2 HP)</span> <span class="stat-count" id="stat-defence">0</span></button>
-                <button onclick="addStat('speed')"><span>👟 Speed (+10% Dg)</span> <span class="stat-count" id="stat-speed">0</span></button>
-                <button onclick="addStat('mana')"><span>🧪 Mana (+5k MP)</span> <span class="stat-count" id="stat-mana">0</span></button>
+                <button onclick="addStat('power')"><span>💪 Power (x2 ATK)</span> <span class="stat-count" id="stat-power">10</span></button>
+                <button onclick="addStat('defence')"><span>🛡️ Defence (x2 HP)</span> <span class="stat-count" id="stat-defence">10</span></button>
+                <button onclick="addStat('speed')"><span>👟 Speed (+10% Dg)</span> <span class="stat-count" id="stat-speed">10</span></button>
+                <button onclick="addStat('mana')"><span>🧪 Mana (+5k MP)</span> <span class="stat-count" id="stat-mana">10</span></button>
             </div>
         </div>
         
@@ -207,4 +209,3 @@
                 <button onclick="mergeShadows('Uncommon', 'Rare', 5)"><span>🧬 5 Uncom</span> ➔ 1 Rare</button>
                 <button onclick="mergeShadows('Rare', 'Epic', 4)"><span>🧬 4 Rare</span> ➔ 1 Epic</button>
                 <button onclick="mergeShadows('Epic', 'Legendary', 5)"><span>🧬 5 Epic</span> ➔ 1 Leg</button>
-                <button onclick="mergeShadows('Legendary', 'Mythical', 4)"><span>🧬 4 Leg</span> ➔ 1 Mythic</button>
