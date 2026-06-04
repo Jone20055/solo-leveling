@@ -33,47 +33,6 @@
             letter-spacing: 4px;
             text-transform: uppercase;
         }
-        #start-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #030611;
-            background-image: radial-gradient(circle at 50% 40%, #0d1a3d 0%, #02040a 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.4s ease;
-        }
-        #start-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: #00d2ff;
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
-            margin-bottom: 30px;
-            letter-spacing: 6px;
-            text-align: center;
-        }
-        #btn-start-game {
-            background: linear-gradient(180deg, #1e1b4b 0%, #4f46e5 100%);
-            color: #fff;
-            border: 2px solid #818cf8;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
-            transition: all 0.3s ease;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        #btn-start-game:hover {
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
-            transform: scale(1.05);
-        }
         .btn-wipe {
             background: #7f1d1d;
             border: 1px solid #ef4444;
@@ -83,8 +42,8 @@
             font-family: 'Orbitron', sans-serif;
             border-radius: 4px;
             cursor: pointer;
+            margin-bottom: 20px;
             width: auto;
-            text-align: center;
         }
         .btn-wipe:hover { background: #b91c1c; color: #fff; }
         #hud-container {
@@ -187,14 +146,10 @@
 </head>
 <body>
 
-    <div id="start-screen">
-        <div id="start-logo">SOLO LEVELING<br><span style="font-size: 16px; color: #94a3b8; letter-spacing: 2px;">SHADOW MONARCH GAUNTLET</span></div>
-        <button id="btn-start-game" onclick="startGameEngine()">⚠️ AWAKEN SYSTEM</button>
-        <button class="btn-wipe" onclick="wipeSaveData()">🗑️ CLEAR BROKEN CACHE SAVE</button>
-    </div>
-
     <h1>THE ARCHITECT'S WEB SYSTEM</h1>
+    <button class="btn-wipe" onclick="wipeSaveData()">🗑️ FORCE RESET CORRUPTED SAVE HISTORY</button>
 
+    <!-- Core Player Website HUD Dashboard -->
     <div id="hud-container">
         <div class="hud-column">
             <div>👑 MC: <span class="hud-val">SUNG JINWOO</span></div>
@@ -211,11 +166,13 @@
         </div>
     </div>
 
+    <!-- Active Text-Based Arena Console Box -->
     <div id="combat-view">
         <h3>📝 SYSTEM MONITOR LOG</h3>
-        <div id="combat-log">Welcome Hunter. You are on Floor 0: TUTORIAL GATE. Click 'ENTER ARENA' to clear the trial dummy.</div>
+        <div id="combat-log">Welcome Hunter. You are on Floor 0: TUTORIAL GATE. Click 'ENTER ARENA' to clear the trial dummy. If interface elements lock up, use the red Force Reset button above.</div>
     </div>
 
+    <!-- Interactive Navigation Web Menus -->
     <div id="controls-grid">
         <div class="control-panel">
             <h3>📊 STAT TUNING</h3>
@@ -233,3 +190,21 @@
                 <button onclick="buyShadow('Common', 10)"><span>🔮 Common</span> <span>10 MP</span></button>
                 <button onclick="buyShadow('Uncommon', 50)"><span>🔮 Uncommon</span> <span>50 MP</span></button>
                 <button onclick="buyShadow('Rare', 250)"><span>🔮 Rare</span> <span>250 MP</span></button>
+                <button onclick="buyShadow('Epic', 1000)"><span>🔮 Epic</span> <span>1k MP</span></button>
+                <button onclick="buyShadow('Legendary', 5000)"><span>🔮 Legendary</span> <span>5k MP</span></button>
+                <button onclick="buyShadow('Mythical', 20000)"><span>🔮 Mythical</span> <span>20k MP</span></button>
+                <button onclick="buyShadow('Special', 100000)"><span>🔮 Special</span> <span>100k MP</span></button>
+                <button onclick="buyShadow('Secret', 300000)"><span>🔮 Secret</span> <span>300k MP</span></button>
+                <button onclick="buyShadow('Unique', 600000)"><span>🔮 Unique</span> <span>600k MP</span></button>
+                <button onclick="buyShadow('Chroma', 1000000)"><span>🔮 Chroma</span> <span>1M MP</span></button>
+            </div>
+        </div>
+        
+        <div class="control-panel">
+            <h3>🧬 MERGE CORE</h3>
+            <div class="scrollable-actions">
+                <button onclick="mergeShadows('Common', 'Uncommon', 5)"><span>🧬 5 Common</span> ➔ 1 Uncom</button>
+                <button onclick="mergeShadows('Uncommon', 'Rare', 5)"><span>🧬 5 Uncom</span> ➔ 1 Rare</button>
+                <button onclick="mergeShadows('Rare', 'Epic', 4)"><span>🧬 4 Rare</span> ➔ 1 Epic</button>
+                <button onclick="mergeShadows('Epic', 'Legendary', 5)"><span>🧬 5 Epic</span> ➔ 1 Leg</button>
+                <button onclick="mergeShadows('Legendary', 'Mythical', 4)"><span>🧬 4 Leg</span> ➔ 1 Mythic</button>
